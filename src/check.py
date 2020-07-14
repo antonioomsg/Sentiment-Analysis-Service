@@ -3,12 +3,17 @@ from src.config import DBURL
 from src.config import DBURL, DB_NAME
 from pymongo import MongoClient
 
-client = pymongo.MongoClient()
-db = client[ "Antoniopepiapi" ] # makes a test database called "testdb"
+#client = pymongo.MongoClient()
+#db = client[ "Antoniopepiapi" ] # makes a test database called "testdb"
+#col = db[ "users" ] #makes a collection called "testcol" in the "testdb"
+
+client = pymongo.MongoClient("mongodb://localhost/Antoniopepiapi")
+#db = client[ "Antoniopepiapi" ] # makes a test database called "testdb"
+db= client.get_database()
 col = db[ "users" ] #makes a collection called "testcol" in the "testdb"
 
-client_text= MongoClient(DBURL)
-print(f"connected to db {DBURL}")
+#client_text= MongoClient(DBURL)
+#print(f"connected to db {DBURL}")
 
 def check_user(name):
     query = {"name":{"$eq":f"{name}"}}
@@ -21,5 +26,5 @@ def check_user(name):
         print(len(data))
         return False
 
-def messageCollectionExists():
-    return (True, False)["messages" in client.collection_names()]
+#def messageCollectionExists():
+#    return (True, False)["messages" in client.collection_names()]
